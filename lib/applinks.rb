@@ -1,3 +1,4 @@
+require "applinks/version"
 require "applinks/engine"
 require "applinks/config"
 require "applinks/builder"

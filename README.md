@@ -33,6 +33,10 @@ Run bundle install:
 bundle install
 ```
 
+Prior to VERSION = "0.1.4", the Applinks::ApplicationHelper needs to be included manually:
+
+__This is not required > 0.1.4__
+
 Include the `Applinks::ApplicationHelper` in your `ApplicationHelper`:
 
 via `app/helpers/application_helper.rb`
