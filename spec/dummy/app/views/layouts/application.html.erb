@@ -1,10 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dummy</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
+  <title>Dummy App For Applinks Testing</title>
+  <%= applinks(
+              {
+                      ios: {
+                              url: 'myapp://docs_for_me',
+                              app_store_id: '123456',
+                              app_name: 'My IOS App Name'
+                      },
+                      ipad: {
+                              url: 'myapp://docs_for_me',
+                              app_store_id: 'ipad1234567',
+                              app_name: 'My iPad App Name'
+                      },
+                      iphone: {
+                              url: 'myapp://docs_for_me',
+                              app_store_id: 'iphone1234568',
+                              app_name: 'My iPhone App Name'
+                      },
+                      android: {
+                              url: 'myapp://docs_for_me',
+                              package: 'org.example.package',
+                              app_name: 'My Android AppName'
+                      },
+                      windows_phone: {
+                              url: 'myapp://docs_for_me',
+                              app_id: 'wpAppId',
+                              app_name: 'My Windows Phone AppName'
+                      },
+                      web: {
+                              url: 'http://example.org/fallback.html',
+                              should_fallback: true
+                      }
+
+              }) %>
+
 </head>
 <body>
 

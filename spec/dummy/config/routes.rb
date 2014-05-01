@@ -1,4 +1,3 @@
 Rails.application.routes.draw do
-
-  mount Applinks::Engine => "/applinks"
+  root "home#index"
 end
