@@ -1,60 +1,60 @@
 <% applinks_builder.ios do |app| %>
-    <meta property="al:ios:url" content="<%= app.url %>"/>
-    <% if app.app_store_id %>
-        <meta property="al:ios:app_store_id" content="<%= app.app_store_id %>"/>
-    <% end %>
-    <% if app.app_name %>
-        <meta property="al:ios:app_name" content="<%= app.app_name %>"/>
-    <% end %>
+<meta property="al:ios:url" content="<%= app.url %>"/>
+<% if app.app_store_id %>
+<meta property="al:ios:app_store_id" content="<%= app.app_store_id %>"/>
+<% end %>
+<% if app.app_name %>
+<meta property="al:ios:app_name" content="<%= app.app_name %>"/>
+<% end %>
 <% end %>
 
 <% applinks_builder.iphone do |app| %>
-    <meta property="al:iphone:url" content="<%= app.url %>"/>
-    <% if app.app_store_id %>
-        <meta property="al:iphone:app_store_id" content="<%= app.app_store_id %>"/>
-    <% end %>
-    <% if app.app_name %>
-        <meta property="al:iphone:app_name" content="<%= app.app_name %>"/>
-    <% end %>
+<meta property="al:iphone:url" content="<%= app.url %>"/>
+<% if app.app_store_id %>
+<meta property="al:iphone:app_store_id" content="<%= app.app_store_id %>"/>
+<% end %>
+<% if app.app_name %>
+<meta property="al:iphone:app_name" content="<%= app.app_name %>"/>
+<% end %>
 <% end %>
 
 <% applinks_builder.ipad do |app| %>
-    <meta property="al:ipad:url" content="<%= app.url %>"/>
-    <% if app.app_store_id %>
-        <meta property="al:ipad:app_store_id" content="<%= app.app_store_id %>"/>
-    <% end %>
-    <% if app.app_name %>
-        <meta property="al:ipad:app_name" content="<%= app.app_name %>"/>
-    <% end %>
+<meta property="al:ipad:url" content="<%= app.url %>"/>
+<% if app.app_store_id %>
+<meta property="al:ipad:app_store_id" content="<%= app.app_store_id %>"/>
+<% end %>
+<% if app.app_name %>
+<meta property="al:ipad:app_name" content="<%= app.app_name %>"/>
+<% end %>
 <% end %>
 
 <% applinks_builder.android do |app| %>
-    <meta property="al:android:url" content="<%= app.url %>"/>
-    <% if app.app_name %>
-        <meta property="al:android:app_name" content="<%= app.app_name %>"/>
-    <% end %>
-    <% if app.package %>
-        <meta property="al:android:package" content="<%= app.package %>"/>
-    <% end %>
+<meta property="al:android:url" content="<%= app.url %>"/>
+<% if app.app_name %>
+<meta property="al:android:app_name" content="<%= app.app_name %>"/>
+<% end %>
+<% if app.package %>
+<meta property="al:android:package" content="<%= app.package %>"/>
+<% end %>
 <% end %>
 
 <% applinks_builder.windows_phone do |app| %>
-    <meta property="al:windows_phone:url" content="<%= app.url %>"/>
-    <% if app.app_name %>
-        <meta property="al:windows_phone:app_name" content="<%= app.app_name %>"/>
-    <% end %>
-    <% if app.app_id %>
-        <meta property="al:windows_phone:app_id" content="<%= app.app_id %>"/>
-    <% end %>
+<meta property="al:windows_phone:url" content="<%= app.url %>"/>
+<% if app.app_name %>
+<meta property="al:windows_phone:app_name" content="<%= app.app_name %>"/>
+<% end %>
+<% if app.app_id %>
+<meta property="al:windows_phone:app_id" content="<%= app.app_id %>"/>
+<% end %>
 <% end %>
 
 <% applinks_builder.web do |app| %>
-    <% if app.url && app.should_fallback? %>
-        <meta property="al:web:url" content="<%= app.url %>"/>
-    <% end %>
-    <% unless app.should_fallback? %>
-        <meta property="al:web:should_fallback" content="false"/>
-    <% end %>
+<% if app.url && app.should_fallback? %>
+<meta property="al:web:url" content="<%= app.url %>"/>
+<% end %>
+<% unless app.should_fallback? %>
+<meta property="al:web:should_fallback" content="false"/>
+<% end %>
 <% end %>
 
 

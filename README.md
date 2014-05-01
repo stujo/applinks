@@ -43,11 +43,8 @@ Use the applinks helper in your layout
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ApplinksDemo</title>
-  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-  <%= applinks({
+<title>ApplinksDemo</title>
+<%= applinks({
                        ios: {
                                url: 'myapp://docs_for_me',
                                app_store_id: '123456',
@@ -81,9 +78,42 @@ Use the applinks helper in your layout
                }) %>
 </head>
 <body>
-
 <%= yield %>
+</body>
+</html>
+```
 
+
+```
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>ApplinksDemo</title>
+<meta property="al:ios:url" content="myapp://docs_for_me"/>
+<meta property="al:ios:app_store_id" content="123456"/>
+<meta property="al:ios:app_name" content="My IOS App Name"/>
+
+<meta property="al:iphone:url" content="myapp://docs_for_me"/>
+<meta property="al:iphone:app_store_id" content="iphone1234568"/>
+<meta property="al:iphone:app_name" content="My iPhone App Name"/>
+
+<meta property="al:ipad:url" content="myapp://docs_for_me"/>
+<meta property="al:ipad:app_store_id" content="ipad1234567"/>
+<meta property="al:ipad:app_name" content="My iPad App Name"/>
+
+<meta property="al:android:url" content="myapp://docs_for_me"/>
+<meta property="al:android:app_name" content="My Android AppName"/>
+<meta property="al:android:package" content="org.example.package"/>
+
+<meta property="al:windows_phone:url" content="myapp://docs_for_me"/>
+<meta property="al:windows_phone:app_name" content="My Windows Phone AppName"/>
+<meta property="al:windows_phone:app_id" content="wpAppId"/>
+
+<meta property="al:web:url" content="http://example.org/fallback.html"/>
+</head>
+<body>
+Hello World
 </body>
 </html>
 ```
