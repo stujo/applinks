@@ -8,6 +8,8 @@ This is a new project, please fork and submit pull requests to help!
 
 Cheers!
 
+[![Gem Version](https://badge.fury.io/rb/applinks.svg)](http://badge.fury.io/rb/applinks)
+
 #Usage
 
 ##Installation
