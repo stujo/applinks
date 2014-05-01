@@ -46,15 +46,21 @@ module Applinks
     def app_block key, block_class
       if block_given?
         if @data.has_key? key
-          appData = block_class.new @data[key]
-          if appData.valid?
-            if @config.debug
-              puts "Applinks: applying invalid block #{key} as #{appData.class.name} -> #{@data[key]} "
-            end
-            yield appData
-          else
-            if @config.debug
-              puts "Applinks: skipping invalid block #{key} -> #{@data[key]}"
+
+          suppliedAppData= @data[key]
+          suppliedAppData = [@data[key]] unless suppliedAppData.instance_of? Array
+
+          suppliedAppData.each do |versionData|
+            appData = block_class.new versionData, suppliedAppData.length > 1
+            if appData.valid?
+              if @config.debug
+                puts "Applinks: applying invalid block #{key} as #{appData.class.name} -> #{@data[key]} "
+              end
+              yield appData
+            else
+              if @config.debug
+                puts "Applinks: skipping invalid block #{key} -> #{@data[key]}"
+              end
             end
           end
         end
@@ -74,10 +80,11 @@ module Applinks
     end
 
     class AppBlock < MetaBlock
-      attr_reader :app_name
+      attr_reader :app_name, :versioned
 
-      def initialize hsh = {}
-        super
+      def initialize hsh, versioned
+        super(hsh)
+        @versioned = versioned
         @app_name = hsh[:app_name] if hsh.has_key?(:app_name)
       end
     end
@@ -85,7 +92,7 @@ module Applinks
     class IOSBlock < AppBlock
       attr_reader :app_store_id, :app_name
 
-      def initialize hsh = {}
+      def initialize hsh, versioned
         super
         @app_store_id = hsh[:app_store_id] if hsh.has_key?(:app_store_id)
       end
@@ -97,7 +104,7 @@ module Applinks
     class AndroidBlock < AppBlock
       attr_reader :package, :app_name
 
-      def initialize hsh = {}
+      def initialize hsh, versioned
         super
         @package = hsh[:package] if hsh.has_key?(:package)
       end
@@ -109,7 +116,7 @@ module Applinks
     class WindowsPhoneBlock < AppBlock
       attr_reader :app_id, :app_name
 
-      def initialize hsh = {}
+      def initialize hsh, versioned
         super
         @app_id = hsh[:app_id] if hsh.has_key?(:app_id)
       end
