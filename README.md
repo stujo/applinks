@@ -19,25 +19,34 @@ A way for apps to link to each other across multiple devices
 
 #Usage
 
-##Installation
+Add to your Gemfile:
 
-In Gemfile:
+via `Gemfile`
 
 ```
 gem 'applinks'
-
 ```
+
+Run bundle install:
 
 ```
 bundle install
-
 ```
 
-Should load the gem
+Include the `Applinks::ApplicationHelper` in your `ApplicationHelper`:
 
-##Sample Application Layout
+via `app/helpers/application_helper.rb`
 
-Use the applinks helper in your layout
+```
+module ApplicationHelper
+  include Applinks::ApplicationHelper
+end
+```
+
+Now add an applinks call to your layout:
+
+via `app/views/layouts/application.html.erb`
+
 
 ```
 <!DOCTYPE html>
@@ -83,6 +92,7 @@ Use the applinks helper in your layout
 </html>
 ```
 
+This would generate the following HTML:
 
 ```
 
