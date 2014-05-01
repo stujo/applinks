@@ -6,38 +6,131 @@ module Applinks
     end
 
     def ios &block
-      if @data.has_key? :ios
-        appData = IOSBlock.new @data[:ios]
-        yield appData if block_given?
+      app_block :ios, IOSBlock do |block|
+        yield block
+      end
+    end
+
+    def ipad &block
+      app_block :ipad, IOSBlock do |block|
+        yield block
+      end
+    end
+
+    def iphone &block
+      app_block :iphone, IOSBlock do |block|
+        yield block
       end
     end
 
     def android &block
-      if @data.has_key? :android
-        appData = AndroidBlock.new @data[:android]
-        yield appData if block_given?
+      app_block :android, AndroidBlock do |block|
+        yield block
+      end
+    end
+
+    def windows_phone &block
+      app_block :windows_phone, WindowsPhoneBlock do |block|
+        yield block
       end
     end
 
     def web &block
-#      yield @config if block_given?
+      app_block :web, WebBlock do |block|
+        yield block
+      end
     end
-  end
 
-  class IOSBlock
-    attr_reader :url, :app_store_id, :app_name
-    def initialize hsh = {}
-      @url = hsh[:url]
-      @app_store_id = hsh[:app_store_id]
-      @app_name = hsh[:app_name]
+
+    private
+    def app_block key, block_class
+      if block_given?
+        if @data.has_key? key
+          appData = block_class.new @data[key]
+          if appData.valid?
+            if @config.debug
+              puts "Applinks: applying invalid block #{key} as #{appData.class.name} -> #{@data[key]} "
+            end
+            yield appData
+          else
+            if @config.debug
+              puts "Applinks: skipping invalid block #{key} -> #{@data[key]}"
+            end
+          end
+        end
+      end
     end
-  end
-  class AndroidBlock
-    attr_reader :url, :package, :app_name
-    def initialize hsh = {}
-      @url = hsh[:url]
-      @package = hsh[:package]
-      @app_name = hsh[:app_name]
+
+    class MetaBlock
+      attr_reader :url
+
+      def initialize hsh = {}
+        @url = hsh[:url] if hsh.has_key?(:url)
+      end
+
+      def valid?
+        false
+      end
+    end
+
+    class AppBlock < MetaBlock
+      attr_reader :app_name
+
+      def initialize hsh = {}
+        super
+        @app_name = hsh[:app_name] if hsh.has_key?(:app_name)
+      end
+    end
+
+    class IOSBlock < AppBlock
+      attr_reader :app_store_id, :app_name
+
+      def initialize hsh = {}
+        super
+        @app_store_id = hsh[:app_store_id] if hsh.has_key?(:app_store_id)
+      end
+
+      def valid?
+        !@url.nil?
+      end
+    end
+    class AndroidBlock < AppBlock
+      attr_reader :package, :app_name
+
+      def initialize hsh = {}
+        super
+        @package = hsh[:package] if hsh.has_key?(:package)
+      end
+
+      def valid?
+        !@package.nil?
+      end
+    end
+    class WindowsPhoneBlock < AppBlock
+      attr_reader :app_id, :app_name
+
+      def initialize hsh = {}
+        super
+        @app_id = hsh[:app_id] if hsh.has_key?(:app_id)
+      end
+
+      def valid?
+        !@url.nil?
+      end
+    end
+    class WebBlock < MetaBlock
+      def initialize hsh = {}
+        super
+        @should_fallback = hsh.has_key?(:should_fallback) ? hsh[:should_fallback] : false
+      end
+
+      def should_fallback?
+        @should_fallback
+      end
+
+      def valid?
+        !@url.nil?
+      end
     end
   end
 end
