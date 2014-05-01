@@ -10,6 +10,13 @@ Cheers!
 
 [![Gem Version](https://badge.fury.io/rb/applinks.svg)](http://badge.fury.io/rb/applinks)
 
+
+#What Are Applinks?
+
+A way for apps to link to each other across multiple devices
+
+[http://applinks.org/documentation/](http://applinks.org/documentation/)
+
 #Usage
 
 ##Installation
