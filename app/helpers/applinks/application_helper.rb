@@ -15,8 +15,10 @@ module Applinks
       }
     end
     def applinks(data = demo_data, template = 'applinks/head')
+      builder = Applinks::Builder.new(Applinks::Config.config, data)
       render(:partial => template,
-             :locals => {applinks: data})
+             :locals => {applinks_builder: builder})
     end
+
   end
 end
