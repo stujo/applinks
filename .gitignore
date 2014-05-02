@@ -10,5 +10,8 @@ spec/dummy/tmp/*
 spec/dummy/tmp/cache
 spec/dummy/.sass-cache
 *.gem
+.env
+coverage/
+
 
 
