@@ -6,44 +6,42 @@ module Applinks
     end
 
     def ios &block
-      app_block :ios, IOSBlock do |block|
-        yield block
+      app_block :ios, IOSBlock do |data|
+        yield data
       end
     end
 
     def ipad &block
-      app_block :ipad, IOSBlock do |block|
-        yield block
+      app_block :ipad, IOSBlock do |data|
+        yield data
       end
     end
 
     def iphone &block
-      app_block :iphone, IOSBlock do |block|
-        yield block
+      app_block :iphone, IOSBlock do |data|
+        yield data
       end
     end
 
     def android &block
-      app_block :android, AndroidBlock do |block|
-        yield block
+      app_block :android, AndroidBlock do |data|
+        yield data
       end
     end
 
     def windows_phone &block
-      app_block :windows_phone, WindowsPhoneBlock do |block|
-        yield block
+      app_block :windows_phone, WindowsPhoneBlock do |data|
+        yield data
       end
     end
 
     def web &block
-      app_block :web, WebBlock do |block|
-        yield block
+      app_block :web, WebBlock do |data|
+        yield data
       end
     end
 
-
     private
-
     def arrayize_data key
       arrayData = @data[key]
 
