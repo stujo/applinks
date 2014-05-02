@@ -71,65 +71,67 @@ module Applinks
     end
 
     class MetaBlock
-      attr_reader :url
-
-      def initialize hsh = {}
-        @url = hsh[:url] if hsh.has_key?(:url)
+      def initialize hsh
+        @hash = hsh
       end
 
-      def valid?
-        false
+      def url
+        @hash[:url]
       end
     end
 
     class AppBlock < MetaBlock
-      attr_reader :app_name, :versioned
+      attr_reader :versioned
 
       def initialize hsh, versioned
         super(hsh)
         @versioned = versioned
-        @app_name = hsh[:app_name] if hsh.has_key?(:app_name)
+      end
+
+      def app_name
+        @hash[:app_name]
       end
     end
 
     class IOSBlock < AppBlock
-      attr_reader :app_store_id
-
       def initialize hsh, versioned
         super
-        @app_store_id = hsh[:app_store_id] if hsh.has_key?(:app_store_id)
+      end
+
+      def app_store_id
+        @hash[:app_store_id]
       end
 
       def valid?
-        !@url.nil?
+        !url.nil?
       end
     end
     class AndroidBlock < AppBlock
-      attr_reader :package
-
       def initialize hsh, versioned
         super
-        @package = hsh[:package] if hsh.has_key?(:package)
+      end
+
+      def package
+        @hash[:package]
       end
 
       def valid?
-        !@package.nil?
+        !package.nil?
       end
     end
     class WindowsPhoneBlock < AppBlock
-      attr_reader :app_id
-
       def initialize hsh, versioned
         super
-        @app_id = hsh[:app_id] if hsh.has_key?(:app_id)
       end
-
+      def app_id
+        @hash[:app_id]
+      end
       def valid?
-        !@url.nil?
+        !url.nil?
       end
     end
     class WebBlock < MetaBlock
-      def initialize hsh = {}, _unused
+      def initialize hsh, _unused
         super(hsh)
         @should_fallback = hsh.has_key?(:should_fallback) ? hsh[:should_fallback] : true
       end
@@ -139,7 +141,7 @@ module Applinks
       end
 
       def valid?
-        !should_fallback? || !@url.nil?
+        !should_fallback? || !url.nil?
       end
     end
   end
