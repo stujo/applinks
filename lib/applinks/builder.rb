@@ -46,13 +46,21 @@ module Applinks
 
     def arrayize_data key
       arrayData = @data[key]
-      [@data[key]] unless arrayData.instance_of? Array
+
+      if arrayData.instance_of? Hash
+        [arrayData]
+      elsif arrayData.nil?
+        []
+      else
+        arrayData
+      end
     end
 
     def app_block key, block_class
       if block_given?
         if @data.has_key? key
-          arrayize_data(key).each do |versionData|
+          suppliedAppData = arrayize_data(key)
+          suppliedAppData.each do |versionData|
             appData = block_class.new versionData, suppliedAppData.length > 1
             if appData.valid?
               yield appData
