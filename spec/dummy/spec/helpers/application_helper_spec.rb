@@ -329,6 +329,15 @@ describe ApplicationHelper do
                                    }
       }
 
+      WEB_NOT_FB_OVERRIDE = {
+          web:{
+              url: WEB_FALLBACK_DATA[:web][:url],
+              should_fallback: WEB_NOT_FALLBACK_DATA[:web][:should_fallback],
+          }
+
+
+      }
+
       context 'web fallback' do
         let(:web_fallback) do
           helper.applinks(WEB_FALLBACK_DATA).to_s.split("\n")
@@ -341,7 +350,6 @@ describe ApplicationHelper do
         end
       end
       context 'no web fallback' do
-
         let(:web_not_fallback) do
           helper.applinks(WEB_NOT_FALLBACK_DATA).to_s.split("\n")
         end
@@ -351,6 +359,18 @@ describe ApplicationHelper do
         end
         it 'should have one line' do
           expect(web_not_fallback.length).to eq 1
+        end
+      end
+      context 'no web fallback (override url)' do
+        let(:web_not_fallback_override) do
+          helper.applinks(WEB_NOT_FB_OVERRIDE).to_s.split("\n")
+        end
+
+        it 'should contain should_fallback false' do
+          expect(web_not_fallback_override[0]).to eq '<meta property="al:web:should_fallback" content="false" />'
+        end
+        it 'should have one line' do
+          expect(web_not_fallback_override.length).to eq 1
         end
       end
     end
