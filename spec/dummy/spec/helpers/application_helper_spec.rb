@@ -56,7 +56,6 @@ describe ApplicationHelper do
                       }
   }
 
-
   IOS_MULTI_DATA = {
       ios: [
           {
@@ -313,6 +312,47 @@ describe ApplicationHelper do
       it 'should be 7 lines' do
         expect(multi_version_meta_array.length).to eq 7
       end
-    end  
+    end
+
+    context 'web url forwarding' do
+
+
+      WEB_FALLBACK_DATA = {web:
+                               {
+                                   url: 'http://applinks.org/documentation'
+                               }
+      }
+
+      WEB_NOT_FALLBACK_DATA = {web:
+                                   {
+                                       should_fallback: false
+                                   }
+      }
+
+      context 'web fallback' do
+        let(:web_fallback) do
+          helper.applinks(WEB_FALLBACK_DATA).to_s.split("\n")
+        end
+        it 'should contain the forwarding url' do
+          expect(web_fallback[0]).to eq '<meta property="al:web:url" content="http://applinks.org/documentation" />'
+        end
+        it 'should have one line' do
+          expect(web_fallback.length).to eq 1
+        end
+      end
+      context 'no web fallback' do
+
+        let(:web_not_fallback) do
+          helper.applinks(WEB_NOT_FALLBACK_DATA).to_s.split("\n")
+        end
+
+        it 'should contain should_fallback false' do
+          expect(web_not_fallback[0]).to eq '<meta property="al:web:should_fallback" content="false" />'
+        end
+        it 'should have one line' do
+          expect(web_not_fallback.length).to eq 1
+        end
+      end
+    end
   end
 end

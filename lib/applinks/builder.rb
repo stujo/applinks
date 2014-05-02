@@ -131,7 +131,7 @@ module Applinks
     class WebBlock < MetaBlock
       def initialize hsh = {}, _unused
         super(hsh)
-        @should_fallback = hsh.has_key?(:should_fallback) ? hsh[:should_fallback] : false
+        @should_fallback = hsh.has_key?(:should_fallback) ? hsh[:should_fallback] : true
       end
 
       def should_fallback?
@@ -139,7 +139,7 @@ module Applinks
       end
 
       def valid?
-        !@url.nil?
+        !should_fallback? || !@url.nil?
       end
     end
   end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    applinks (0.1.6)
+    applinks (0.1.7)
       rails (~> 4.0)
 
 GEM
