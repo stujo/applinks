@@ -10,7 +10,7 @@ Cheers!
 
 [![Gem Version](https://badge.fury.io/rb/applinks.svg)](http://badge.fury.io/rb/applinks)
 
-
+Travis Not Working
 [![Build Status](https://travis-ci.org/stujo/applinks.svg?branch=master)](https://travis-ci.org/stujo/applinks)
 
 [![Code Climate](https://codeclimate.com/github/stujo/applinks.png)](https://codeclimate.com/github/stujo/applinks)
