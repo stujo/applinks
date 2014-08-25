@@ -14,14 +14,14 @@ describe "ApplicationHelperWithDefaults" do
   }
 
 
-  WDEFAULTS_IOS_URL_TAG = '<meta property="al:ios:url" content="xyz://docswd" />'
+  WDEFAULTS_IOS_URL_TAG = '<meta property="al:ios:url" content="xyz://docsoriginal" />'
   WDEFAULTS_IOS_APP_TAG = '<meta property="al:ios:app_name" content="Stu Test App OVERRIDE" />'
   WDEFAULTS_IOS_STORE_TAG = '<meta property="al:ios:app_store_id" content="STUJO123DEFAULT" />'
   WDEFAULTS_IOS_APP_DEFAULT_TAG = '<meta property="al:ios:app_name" content="Stu Test App DEFAULT" />'
 
   WDEFAULTS_IOS_DATA = {ios:
                             {
-                                url: 'xyz://docswd',
+                                url: 'xyz://docsoriginal',
                                 app_name: 'Stu Test App OVERRIDE',
                             }
   }
@@ -181,12 +181,10 @@ describe "ApplicationHelperWithDefaults" do
         helper.applinks({iphone: {:url => WDEFAULTS_IPHONE_DATA[:iphone][:url]}})
       end
 
-      it 'should only render the iphone url meta tags' do
+      it 'should render the iphone url and app default meta tags' do
         expect(part_iphone_url).to include WDEFAULTS_IPHONE_URL_TAG, WDEFAULTS_IPHONE_DEFAULT_APP_TAG, WDEFAULTS_IPHONE_DEFAULT_STORE_TAG
       end
-      it 'should only render the iphone url meta tags' do
-        expect(part_iphone_url).to_not include(WDEFAULTS_IPHONE_APP_TAG, WDEFAULTS_IPHONE_STORE_TAG)
-      end
+
       it 'should not render any of the other meta tags' do
         expect(part_iphone_url).to_not(
             include *all_targets_except("iphone")
@@ -214,9 +212,11 @@ describe "ApplicationHelperWithDefaults" do
       it 'should only render the ipad url meta tags' do
         expect(part_ipad_url).to include WDEFAULTS_IPAD_URL_TAG
       end
-      it 'should only render the ipad url meta tags' do
-        expect(part_ipad_url).to_not include(WDEFAULTS_IPAD_APP_TAG, WDEFAULTS_IPAD_STORE_TAG)
+
+      it 'should only render the ipad url and no default meta tags' do
+        expect(part_ipad_url.to_str.strip).to eq WDEFAULTS_IPAD_URL_TAG
       end
+
       it 'should not render any of the other meta tags' do
         expect(part_ipad_url).to_not(
             include *all_targets_except("ipad")
