@@ -136,4 +136,48 @@ Hello World
 </html>
 ```
 
+#Default Values
+
+You can specify default values which will be used on all pages in  ``config/initializers/applinks.rb``
+
+The defaults are only used for non-versioned applinks and are only rendered if the hash supplied to ``applinks()`` 
+in the template includes the appropriate parent key like ``ios`` or ``ipad``. If the top level key is missing from 
+the hash supplied to ``applinks()`` then the default values for that key are ignored
+
+
+
+```
+Applinks::Config.config do |config|
+
+  config.defaults= {
+      ios: {
+          app_store_id: '123456DEFAULT',
+          app_name: 'IOS Default App Name'
+      },
+      ipad: {
+          app_store_id: 'ipad1234567DEFAULT',
+          app_name: 'My Default iPad App Name'
+      },
+      iphone: {
+          app_store_id: 'iphone1234568DEFAULT',
+          app_name: 'DMy iPhone App Name'
+      },
+      android: {
+          package: 'org.example.package.default',
+          app_name: 'My Default Android AppName'
+      },
+      windows_phone: {
+          app_id: 'wpAppIdDefault',
+          app_name: 'My Default Windows Phone AppName'
+      },
+      web: {
+          url: 'http://example.org/default_fallback.html',
+      }
+
+  }
+
+end
+```
+
+
 
